@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    <link rel="stylesheet" href="css/style.css">
+    <title>Array Toasts</title>
+</head>
+
+<body class="black white-text">
+
+    <div class="btn">Array Toasts</div>
+    <p class="bold"></p>
+    <ul class="hide"></ul>
+
+    <script>
+
+        const content = document.querySelector('p');
+        const button = document.querySelector('.btn');
+        const ul = document.querySelector('ul');
+        const items = [
+            'Buhari is a bad boy.',
+            'Aisha Buhari now uses Dubai as her permanent residence.',
+            'Sanwo Olu denies ordering the killings at Tollgate.',
+            'Godwin Emefiele chose to freeze accounts of Nigerian citizens.'
+        ];
+
+        // Move items as lists to the DOM
+        items.forEach(item => {
+            let li = document.createElement('li');
+            li.textContent = item;
+            ul.appendChild(li);
+        });
+
+        const lists = document.querySelectorAll('li');
+
+        // Display list items randomly on the DOM
+        const displayItems = () => {
+            const getItem = items[Math.floor(Math.random() * items.length)];
+            content.textContent = getItem;
+
+            lists.forEach(list => {
+                if (content.textContent === list.textContent) {
+                    list.classList.add('border');
+                }
+                else {
+                    list.classList.remove('border');
+                }
+            })
+        }
+
+        // display list continuously after click 
+        const displayItemsAfterClick = () => {
+            if (content.textContent !== "") {
+                displayItems();
+            }
+        }
+
+        const showList = () => {
+            button.classList.add('disabled');
+            document.querySelector('ul').classList.remove('hide');
+        }
+
+        // change displayed list after 5 seconds 
+        setInterval(displayItemsAfterClick, 5000);
+
+        // display list items on button click
+        button.addEventListener('click', e => {
+            displayItems();
+            showList();
+        });
+    </script>
+</body>
+
+</html>
