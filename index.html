@@ -11,116 +11,117 @@
 
 <body>
 
-
-    <div class="row"></div>
-    <div class="btn" id="start">Array Toasts</div>
-    <div class="btn" id="stop">Stop Toasts</div>
+    <div class="btn blue" id="start">Array Toasts</div>
+    <div class="btn blue" id="stop">Stop Toasts</div>
     <div class="container">
-        <ul class="hide row"></ul>
+        <ul class="hide"></ul>
     </div>
 
     <script src="js/materialize.min.js"></script>
 
     <script>
-        const content = document.querySelector('p');
         const button = document.querySelector('#start');
         const stopButton = document.querySelector('#stop');
         const ul = document.querySelector('ul');
         const items = [
-            'Microsoft',
-            'Google',
-            'Facebook',
-            'Twitter',
-            'Apple',
-            'Paystack',
-            'Paypal',
-            'Bing',
-            'Ebay',
-            'Web',
-            'Frontend',
-            'Chrome',
-            'Whatsapp',
-            'Instagram',
-            'Backend',
-            'Jumia',
-            'OPay',
-            'MTN',
             'Airtel',
-            '9Mobile',
-            'Glo',
+            'Andela',
+            'Apple',
+            'Atom',
+            'Backend',
+            'Bing',
+            'Chrome',
             'Computer',
             'Developer',
+            'Ebay',
+            'Facebook',
+            'Frontend',
             'Full-stack',
+            'Glo',
+            'Google',
+            'Instagram',
+            'Jumia',
+            'Microsoft',
+            'MTN',
+            'OPay',
+            'Paypal',
+            'Paystack',
+            'Twitter',
+            'Vanilla',
             'VS Code',
-            'Atom'
+            'Web',
+            'Whatsapp',
+            '9Mobile'
         ];
 
         // Move items as lists to the DOM
         items.forEach(item => {
-            const li = document.createElement('li');
-            li.textContent = item;
-            li.setAttribute('onclick', `M.toast({html: "${item}", classes: 'rounded'})`);
+            const div = document.createElement('div');
+            const a = document.createElement('a');
+            a.textContent = item;
+            const img = document.createElement('img');
+            img.setAttribute('src', 'img/fly.svg');
             const badge = document.createElement('sup');
-            // li.classList.add('col')
+            // li.classList.add('collection-item')
             // li.classList.add('s2');
             // li.classList.add('hoverable');
-            ul.appendChild(li);
-            ul.appendChild(badge);
+            div.setAttribute('onclick', `M.toast({html: "${item}", displayLength: 2000, classes: 'rounded'})`);
+            // div.classList.add('btn');
+            div.appendChild(a);
+            div.appendChild(badge);
+            div.appendChild(img)
+            ul.appendChild(div);
         });
 
-        const lists = document.querySelectorAll('li');
+        const lists = document.querySelectorAll('a');
+        const divs = document.querySelectorAll('ul div');
 
-        // increasee count of clicks
-        lists.forEach(list => {
-            list.addEventListener('click', e => {
-                list.nextSibling.innerHTML = Number(list.nextSibling.innerHTML) + 1;
+        // increase count of clicks
+        divs.forEach(div => {
+            div.addEventListener('click', e => {
+                div.querySelector('sup').innerHTML = Number(div.querySelector('sup').innerHTML) + 1;
             })
         })
 
         // Display list items randomly on the DOM
         const displayItems = () => {
-            const getItem = items[Math.floor(Math.random() * items.length)];// randomly gegtting the indwx position
-            // content.textContent = getItem;
-            M.toast({ html: `${getItem}`, classes: 'rounded' });
+            const getItem = items[Math.floor(Math.random() * items.length)]; // randomly getting the index position
+
+            // Toast List Items at random
+            M.toast({ html: `${getItem}`, displayLength: 2000, classes: 'rounded' });
 
 
             lists.forEach(list => {
                 if (list.textContent === getItem) {
                     list.nextSibling.innerHTML = Number(list.nextSibling.innerHTML) + 1;
-                    list.classList.add('border');
+                    list.parentElement.classList.add('z-depth-5', 'border');
                 }
                 else {
-                    list.classList.remove('border');
+                    list.parentElement.classList.remove('z-depth-5', 'border');
                 }
             })
         }
 
-        // display list continuously after click 
-        // const displayItemsAfterClick = () => {
-        //     if (content.textContent !== "") {
-        //         displayItems();
-        //     }
-        // }
-
-        const showList = () => {
-            button.classList.add('disabled');
-            document.querySelector('ul').classList.remove('hide');
-        }
-
         // display list items on button click
-        button.addEventListener('click', e => {
-            displayItems();
-            showList();
-        });
 
-        // change displayed list after 5 seconds 
-        const startToast = setInterval(displayItems, 5000);
-
-        const stop = () => {
-            clearInterval(startToast);
+        const buttonToast = () => {
+            let startToast;
+            button.addEventListener('click', e => {
+                button.classList.add('disabled');
+                stopButton.classList.remove('disabled');
+                ul.classList.remove('hide');
+                startToast = setInterval(displayItems, 2000);
+            });
+            stopButton.addEventListener('click', e => {
+                stopButton.classList.add('disabled');
+                button.classList.remove('disabled');
+                ul.classList.add('hide');
+                clearInterval(startToast);
+            });
         }
 
-        button.addEventListener('click', stop);
+        buttonToast();
+        // change displayed list after 5 seconds
     </script>
 
     <!-- -- Week 3 Presentation
