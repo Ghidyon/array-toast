@@ -12,8 +12,10 @@
 <body>
 
     <div class="container">
-        <div class="btn blue" id="start">Array Toasts</div>
-        <div class="btn blue" id="stop">Stop Toasts</div>
+        <div class="btn-header">
+            <div class="toast-btn control waves-effect waves-light" id="start">Start Toast</div>
+            <div class="toast-btn control waves-effect waves-light" id="stop">Stop Toast</div>
+        </div>
         <ul class="hide"></ul>
     </div>
 
@@ -24,7 +26,6 @@
         const stopButton = document.querySelector('#stop');
         const ul = document.querySelector('ul');
         const items = [
-            'Airtel',
             'Andela',
             'Apple',
             'Atom',
@@ -37,12 +38,10 @@
             'Facebook',
             'Frontend',
             'Full-stack',
-            'Glo',
             'Google',
             'Instagram',
             'Jumia',
             'Microsoft',
-            'MTN',
             'OPay',
             'Paypal',
             'Paystack',
@@ -50,9 +49,7 @@
             'Vanilla',
             'VS Code',
             'Web',
-            'Whatsapp',
-            '9Mobile'
-        ];
+            'Whatsapp'];
 
         // Move items as lists to the DOM
         items.forEach(item => {
@@ -61,12 +58,12 @@
             a.textContent = item;
             const img = document.createElement('img');
             img.setAttribute('src', 'img/fly.svg');
-            const badge = document.createElement('sup');
-            div.setAttribute('onclick', `M.toast({html: "${item}", displayLength: 2000, classes: 'rounded toast-btn'})`);
+            const badge = document.createElement('span');
+            div.setAttribute('onclick', `M.toast({html: "${item}", classes: 'rounded toast-btn'})`);
             div.classList.add('dark-blue');
             div.appendChild(a);
             div.appendChild(badge);
-            div.appendChild(img)
+            div.appendChild(img);
             ul.appendChild(div);
         });
 
@@ -76,7 +73,7 @@
         // increase count of clicks
         divs.forEach(div => {
             div.addEventListener('click', e => {
-                div.querySelector('sup').innerHTML = Number(div.querySelector('sup').innerHTML) + 1;
+                div.querySelector('span').innerHTML = Number(div.querySelector('span').innerHTML) + 1;
             })
         })
 
@@ -85,11 +82,14 @@
             const getItem = items[Math.floor(Math.random() * items.length)]; // randomly getting the index position
 
             // Toast List Items at random
-            M.toast({ html: `${getItem}`, displayLength: 2000, classes: 'rounded toast-btn' });
+            M.toast({ html: `${getItem}`, classes: 'rounded toast-btn' });
 
-
+            // add and update badges
             lists.forEach(list => {
                 if (list.textContent === getItem) {
+                    if (list.nextSibling.innerHTML === '') {
+                        list.nextSibling.classList.add('white');
+                    }
                     list.nextSibling.innerHTML = Number(list.nextSibling.innerHTML) + 1;
                     list.parentElement.classList.add('z-depth', 'border');
                 }
@@ -100,34 +100,35 @@
         }
 
         // display list items on button click
-
         const buttonToast = () => {
             let startToast;
+            stopButton.classList.add('disable');
             button.addEventListener('click', e => {
-                button.classList.add('disabled');
-                stopButton.classList.remove('disabled');
+                button.disabled = true;
+                button.classList.add('disable');
+                stopButton.classList.remove('disable');
                 ul.classList.remove('hide');
-                startToast = setInterval(displayItems, 2000);
+                startToast = setInterval(displayItems, 5000);
             });
             stopButton.addEventListener('click', e => {
-                stopButton.classList.add('disabled');
-                button.classList.remove('disabled');
+                stopButton.classList.add('disable');
+                stopButton.disabled = true;
+                button.classList.remove('disable');
                 ul.classList.add('hide');
                 clearInterval(startToast);
             });
         }
 
         buttonToast();
-        // change displayed list after 5 seconds
     </script>
 
     <!-- -- Week 3 Presentation
-         The entire page should be fine
+         The entire page should be fine -- Done
          Create an array, nothing less than 20 to 30 itmes -- Done
          When you click on the list item, it should be toasted. -- Done
          each of the list you record the number of times it has been toasted. -- Done
          Start button -- Done
-         Stop button
+         Stop button -- Done
     -->
 </body>
 
