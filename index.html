@@ -13,8 +13,8 @@
 
 
     <div class="row"></div>
-    <div class="btn">Array Toasts</div>
-    <div class="btn">Stop Toasts</div>
+    <div class="btn" id="start">Array Toasts</div>
+    <div class="btn" id="stop">Stop Toasts</div>
     <div class="container">
         <ul class="hide row"></ul>
     </div>
@@ -23,7 +23,8 @@
 
     <script>
         const content = document.querySelector('p');
-        const button = document.querySelector('.btn');
+        const button = document.querySelector('#start');
+        const stopButton = document.querySelector('#stop');
         const ul = document.querySelector('ul');
         const items = [
             'Microsoft',
@@ -56,10 +57,10 @@
 
         // Move items as lists to the DOM
         items.forEach(item => {
-            let li = document.createElement('li');
+            const li = document.createElement('li');
             li.textContent = item;
             li.setAttribute('onclick', `M.toast({html: "${item}", classes: 'rounded'})`);
-            let badge = document.createElement('sup');
+            const badge = document.createElement('sup');
             // li.classList.add('col')
             // li.classList.add('s2');
             // li.classList.add('hoverable');
@@ -69,9 +70,9 @@
 
         const lists = document.querySelectorAll('li');
 
+        // increasee count of clicks
         lists.forEach(list => {
             list.addEventListener('click', e => {
-                console.log(list.nextSibling);
                 list.nextSibling.innerHTML = Number(list.nextSibling.innerHTML) + 1;
             })
         })
@@ -113,14 +114,20 @@
         });
 
         // change displayed list after 5 seconds 
-        setInterval(displayItems, 5000);
+        const startToast = setInterval(displayItems, 5000);
+
+        const stop = () => {
+            clearInterval(startToast);
+        }
+
+        button.addEventListener('click', stop);
     </script>
 
     <!-- -- Week 3 Presentation
          The entire page should be fine
          Create an array, nothing less than 20 to 30 itmes -- Done
          When you click on the list item, it should be toasted. -- Done
-         each of the list you record the number of times it has been toasted.
+         each of the list you record the number of times it has been toasted. -- Done
          Start button -- Done
          Stop button
     -->
