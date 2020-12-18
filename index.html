@@ -15,7 +15,6 @@
     <div class="row"></div>
     <div class="btn">Array Toasts</div>
     <div class="btn">Stop Toasts</div>
-    <p class="bold"></p>
     <div class="container">
         <ul class="hide row"></ul>
     </div>
@@ -69,6 +68,13 @@
         });
 
         const lists = document.querySelectorAll('li');
+
+        lists.forEach(list => {
+            list.addEventListener('click', e => {
+                console.log(list.nextSibling);
+                list.nextSibling.innerHTML = Number(list.nextSibling.innerHTML) + 1;
+            })
+        })
 
         // Display list items randomly on the DOM
         const displayItems = () => {
