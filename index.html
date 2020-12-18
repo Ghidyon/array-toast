@@ -11,9 +11,9 @@
 
 <body>
 
-    <div class="btn blue" id="start">Array Toasts</div>
-    <div class="btn blue" id="stop">Stop Toasts</div>
     <div class="container">
+        <div class="btn blue" id="start">Array Toasts</div>
+        <div class="btn blue" id="stop">Stop Toasts</div>
         <ul class="hide"></ul>
     </div>
 
@@ -62,11 +62,8 @@
             const img = document.createElement('img');
             img.setAttribute('src', 'img/fly.svg');
             const badge = document.createElement('sup');
-            // li.classList.add('collection-item')
-            // li.classList.add('s2');
-            // li.classList.add('hoverable');
-            div.setAttribute('onclick', `M.toast({html: "${item}", displayLength: 2000, classes: 'rounded'})`);
-            // div.classList.add('btn');
+            div.setAttribute('onclick', `M.toast({html: "${item}", displayLength: 2000, classes: 'rounded toast-btn'})`);
+            div.classList.add('dark-blue');
             div.appendChild(a);
             div.appendChild(badge);
             div.appendChild(img)
@@ -88,16 +85,16 @@
             const getItem = items[Math.floor(Math.random() * items.length)]; // randomly getting the index position
 
             // Toast List Items at random
-            M.toast({ html: `${getItem}`, displayLength: 2000, classes: 'rounded' });
+            M.toast({ html: `${getItem}`, displayLength: 2000, classes: 'rounded toast-btn' });
 
 
             lists.forEach(list => {
                 if (list.textContent === getItem) {
                     list.nextSibling.innerHTML = Number(list.nextSibling.innerHTML) + 1;
-                    list.parentElement.classList.add('z-depth-5', 'border');
+                    list.parentElement.classList.add('z-depth', 'border');
                 }
                 else {
-                    list.parentElement.classList.remove('z-depth-5', 'border');
+                    list.parentElement.classList.remove('z-depth', 'border');
                 }
             })
         }
