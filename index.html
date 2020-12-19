@@ -13,8 +13,8 @@
 
     <div class="container">
         <div class="btn-header">
-            <div class="toast-btn control waves-effect waves-light" id="start">Start Toast</div>
-            <div class="toast-btn control waves-effect waves-light" id="stop">Stop Toast</div>
+            <div class="control waves-effect waves-light" id="start">Start Toast</div>
+            <div class="control waves-effect waves-light" id="stop">Stop Toast</div>
         </div>
         <ul class="hide"></ul>
     </div>
@@ -59,7 +59,7 @@
             const img = document.createElement('img');
             img.setAttribute('src', 'img/fly.svg');
             const badge = document.createElement('span');
-            div.setAttribute('onclick', `M.toast({html: "${item}", classes: 'rounded toast-btn'})`);
+            div.setAttribute('onclick', `M.toast({html: "${item}", classes: 'rounded toast-btn', completeCallback: hello()})`);
             div.classList.add('dark-blue');
             div.appendChild(a);
             div.appendChild(badge);
@@ -97,6 +97,10 @@
                     list.parentElement.classList.remove('z-depth', 'border');
                 }
             })
+        }
+
+        const hello = () => {
+            console.log(parent);
         }
 
         // display list items on button click
