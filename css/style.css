@@ -114,6 +114,6 @@ ul div:active {
         box-shadow: none;
         color: #ffffff;
         font-weight: normal;
-        margin-bottom: .5rem;
+        margin-bottom: 0;
     }
 }
