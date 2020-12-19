@@ -59,21 +59,25 @@
             const img = document.createElement('img');
             img.setAttribute('src', 'img/fly.svg');
             const badge = document.createElement('span');
-            div.setAttribute('onclick', `M.toast({html: "${item}", classes: 'rounded toast-btn', completeCallback: hello()})`);
             div.classList.add('dark-blue');
             div.appendChild(a);
             div.appendChild(badge);
             div.appendChild(img);
             ul.appendChild(div);
+            div.setAttribute('onclick', `M.toast({ html: "${item}", classes: 'rounded toast-btn' })`);
         });
 
         const lists = document.querySelectorAll('a');
         const divs = document.querySelectorAll('ul div');
 
-        // increase count of clicks
+        // increase count of clicks and add badge color
         divs.forEach(div => {
             div.addEventListener('click', e => {
-                div.querySelector('span').innerHTML = Number(div.querySelector('span').innerHTML) + 1;
+                const count = div.querySelector('span');
+                count.innerHTML = Number(count.innerHTML) + 1;
+                if (count.classList.value !== 'white') {
+                    count.classList.add('white');
+                }
             })
         })
 
@@ -97,10 +101,6 @@
                     list.parentElement.classList.remove('z-depth', 'border');
                 }
             })
-        }
-
-        const hello = () => {
-            console.log(parent);
         }
 
         // display list items on button click
