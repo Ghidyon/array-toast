@@ -39,7 +39,7 @@ a {
     cursor: pointer;
 }
 
-#start.control.disable, #stop.control.disable {
+#start.control.disable, #stop.control.disable, #start.control.disable:hover, #stop.control.disable:hover {
     cursor: no-drop;
     opacity: .3;
 }

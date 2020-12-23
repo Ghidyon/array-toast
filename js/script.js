@@ -85,6 +85,7 @@ const buttonToast = () => {
     stopButton.classList.add('disable');
     startButton.addEventListener('click', e => {
         startButton.disabled = true;
+        stopButton.disabled = false;
         startButton.classList.add('disable');
         stopButton.classList.remove('disable');
         ul.classList.remove('hide');
@@ -93,6 +94,7 @@ const buttonToast = () => {
     stopButton.addEventListener('click', e => {
         stopButton.classList.add('disable');
         stopButton.disabled = true;
+        startButton.disabled = false;
         startButton.classList.remove('disable');
         ul.classList.add('hide');
         clearInterval(startToast);
